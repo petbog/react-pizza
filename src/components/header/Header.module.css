@@ -1,0 +1,41 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #F6F6F6;
+}
+.header_info{
+    max-width: 316px;
+    display: flex;
+    justify-content: space-between;
+}
+.header_logo{
+    width: 38px;
+    height: 38px;
+    padding: 33px 14px 0 0;
+}
+.header_title{
+    display: flex;
+    flex-direction: column;
+    height: 130px;
+    align-items: flex-start;
+}
+.header_title_pizza{
+    font-weight: 800;
+    font-size: 24px;
+    margin-bottom: -14px;
+}
+.header_title_text{
+    font-weight: 400;
+    font-size: 16px;
+}
+.header__button__container{
+    margin: 36px 43px 0 0;
+}
+.header__button{
+ background-color: #FE5F1E;
+ color: #fff;
+ border: none;
+ padding: 16px 22px;
+ border-radius: 31%;
+ font-size: 16px;
+}
