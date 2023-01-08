@@ -1,0 +1,4 @@
+.item_title{
+    display: flex;
+    justify-content: flex-start;
+}

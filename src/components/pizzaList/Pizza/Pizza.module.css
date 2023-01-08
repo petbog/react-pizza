@@ -1,0 +1,31 @@
+.pizza_container{
+max-width: 280px;
+}
+.pizza_info{
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #F3F3F3;
+}
+.pizza_testo{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.pizza_size{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.pizza_dough{
+    padding: 12px 34px;
+    margin: 4px 0px;
+    border-radius: 10%;
+}
+.pizza_size_items{
+    padding: 12px 25px;
+    margin: 4px 0px;
+    border-radius: 10%;
+}
+.active{
+    background-color: #fff;
+}
