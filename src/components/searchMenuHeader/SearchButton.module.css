@@ -16,6 +16,7 @@
     color: #2C2C2C;
     background-color:  #F9F9F9;;
     border-radius:46%;
+    cursor: pointer;
 }
 .active{
     background-color:#282828;

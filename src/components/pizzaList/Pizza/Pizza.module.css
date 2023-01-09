@@ -1,5 +1,6 @@
 .pizza_container{
 max-width: 280px;
+margin: 0 70px 60px 0;
 }
 .pizza_info{
     font-size: 14px;
@@ -28,4 +29,8 @@ max-width: 280px;
 }
 .active{
     background-color: #fff;
+}
+.img_pizza{
+    width: 250px;
+    height: 250px;
 }
