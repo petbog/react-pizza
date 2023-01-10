@@ -1,8 +1,12 @@
+import { useState } from 'react'
 import classes from './Pizza.module.css'
 
 const Pizza = ({ imageUrl, title, types, sizes, price, category, rating }) => {
-    const typeNames =['тонкое','традиционное']
-    
+    const typeNames = ['тонкое', 'традиционное'];
+    const [typePizza, setTypePizza] = useState(0);
+    const [sizePizza, setSizePizza] = useState(0)
+
+
 
     return (
         <div className="">
@@ -12,14 +16,16 @@ const Pizza = ({ imageUrl, title, types, sizes, price, category, rating }) => {
                 <div className={classes.pizza_info}>
                     <div className={classes.pizza_testo}>
                         {
-                            types.map(type => <p className={classes.pizza_dough}>{typeNames[type]}</p>)
+                            types.map(type => <p onClick={() => setTypePizza(type)}
+                                className={`${classes.pizza_dough} ${typePizza === type ? classes.active : ''}`}>{typeNames[type]}</p>)
                         }
                     </div>
                     <div className={classes.pizza_size}>
                         {
-                            sizes.map(size => <p key={size.id} className={classes.pizza_size_items}>{size} см</p>)
+                            sizes.map((size,i) => <p onClick={()=> setSizePizza(i)} key={size.id} 
+                            className={`${classes.pizza_size_items} ${sizePizza === i ? classes.active : ''}`}>{size} см</p>)
                         }
-                        
+
                     </div>
 
                 </div>

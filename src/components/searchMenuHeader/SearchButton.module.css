@@ -1,6 +1,7 @@
 .SearchButton {
     list-style: none;
     display: flex;
+    height: 224px;
 }
 
 .SearchButton_item:nth-child(1) {
@@ -8,17 +9,24 @@
 }
 
 .SearchButton_item+.SearchButton_item {
-    margin-right: 90px;
+    margin-right: 40px;
 }
 
 .SearchButton_item {
-    padding: 9px 22px;
+    padding: 27px 15px;
     color: #2C2C2C;
     background-color:  #F9F9F9;;
     border-radius:46%;
     cursor: pointer;
+    height: 10px;
+    align-self: center;
+    margin-top: -47px;
 }
 .active{
     background-color:#282828;
     color:#FFFFFF;
+}
+.SearchButton_container{
+    display: flex;
+    justify-content: space-between;
 }
