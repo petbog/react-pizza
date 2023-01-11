@@ -13,14 +13,14 @@
 }
 
 .SearchButton_item {
-    padding: 27px 15px;
+    padding: 12px 11px;
     color: #2C2C2C;
     background-color:  #F9F9F9;;
     border-radius:46%;
     cursor: pointer;
-    height: 10px;
     align-self: center;
     margin-top: -47px;
+    font-weight:700 ;
 }
 .active{
     background-color:#282828;

@@ -16,8 +16,15 @@
 
 .active{
     color:#FE5F1E;
+    /* background-color: rgb(254,95,30,0.1);; */
 }
 .pizze_search{
     margin-top: 87px;
     cursor: pointer;
+}
+.pizza_triangle{
+    margin-right: 7px;
+}
+.search_position{
+    color: #FE5F1E;
 }

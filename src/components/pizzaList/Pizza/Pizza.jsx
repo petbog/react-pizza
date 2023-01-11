@@ -5,6 +5,7 @@ const Pizza = ({ imageUrl, title, types, sizes, price, category, rating }) => {
     const typeNames = ['тонкое', 'традиционное'];
     const [typePizza, setTypePizza] = useState(0);
     const [sizePizza, setSizePizza] = useState(0)
+    const [number, setNumber] = useState(0)
 
 
 
@@ -22,10 +23,17 @@ const Pizza = ({ imageUrl, title, types, sizes, price, category, rating }) => {
                     </div>
                     <div className={classes.pizza_size}>
                         {
-                            sizes.map((size,i) => <p onClick={()=> setSizePizza(i)} key={size.id} 
-                            className={`${classes.pizza_size_items} ${sizePizza === i ? classes.active : ''}`}>{size} см</p>)
+                            sizes.map((size, i) => <p onClick={() => setSizePizza(i)} key={size.id}
+                                className={`${classes.pizza_size_items} ${sizePizza === i ? classes.active : ''}`}>{size} см</p>)
                         }
 
+                    </div>
+                    <div className={classes.bottom_pizza_price}>
+                        <div className={classes.pizza_price}>от {price} ₽</div>
+                        <div onClick={() => { setNumber(number + 1) }}
+                            className={classes.pizza_number_price}>+ Добавить
+                            <span className={classes.number}>{number}</span>
+                        </div>
                     </div>
 
                 </div>
