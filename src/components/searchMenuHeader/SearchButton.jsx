@@ -3,8 +3,8 @@ import classes from './SearchButton.module.css'
 import SearchTypePizza from './searchTypePizza/SearchTypePizza'
 
 const SearchButton = () => {
-    const names = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
-    const [activeIndex, setActiveIndex] = useState(0)
+    const names = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const OnClickActive = (i) => {
         setActiveIndex(i)
