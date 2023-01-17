@@ -1,0 +1,36 @@
+.basket {
+    height: 76vh;
+}
+
+.basket_title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 34px;
+}
+
+.basket_text {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+}
+
+.basket_img {
+    width: 300px;
+    height: 255px;
+    margin: 40px 0 0 0;
+}
+
+.basket_button {
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    background-color: #282828;
+    padding: 19px 35px 20px 35px;
+    text-decoration: none;
+    border-radius: 43%;
+}
+
+.basket_button_container {
+    margin: 105px 0 0 0;
+}

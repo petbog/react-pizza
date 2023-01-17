@@ -1,0 +1,23 @@
+.ThereIsNoPage_container{
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.ThereIsNoPage_title{
+    font-size: 47px;
+}
+.ThereIsNoPage_button_container{
+    margin-top: 130px;
+}
+.ThereIsNoPage_button{
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    background-color: #282828;
+    padding: 19px 35px 20px 35px;
+    text-decoration: none;
+    border-radius: 43%;
+}
