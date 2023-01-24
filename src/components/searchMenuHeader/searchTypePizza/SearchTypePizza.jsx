@@ -11,7 +11,6 @@ const SearchTypePizza = ({ ratingId, setRatingId }) => {
         { name: 'по алфавиту ↑', typePizza: 'title' },
         { name: 'по алфавиту ↓', typePizza: '-title' }
     ];
-    console.log(ratingId.typePizza)
 
 
     const ActiveListSearch = (i) => {

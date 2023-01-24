@@ -56,3 +56,35 @@
 text-decoration: none;
 color: #181818;
 }
+.searchPizza{
+    width: 300px;
+    height: 33px;
+    border-radius: 6px;
+    border: 1px solid rgba(78,87,84,0.5);
+    margin: 39px 0 0 0;
+    padding-left: 39px;
+}
+
+.search_container{
+    position: relative;
+}
+.close{
+    position: absolute;
+    top: 41px;
+    left: 306px;
+    opacity: 0.5;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+.close:hover{
+    opacity: 0.7;
+}
+.search{
+    position: absolute;
+    top: 45px;
+    left: 4px;
+    width: 25px;
+    height: 25px;
+    opacity: 0.5;
+}

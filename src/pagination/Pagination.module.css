@@ -1,0 +1,30 @@
+.Pagination {
+    display: flex;
+    margin: 0 0 0px 0;
+    padding: 0 0 20px 0;
+}
+
+
+.Pagination li{
+    list-style: none;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+.Pagination li a{
+    cursor: pointer;
+    border-radius: 30px;
+    color:#EB5A1E ;
+    border: 1px solid #EB5A1E;
+    line-height: 46px;
+    padding: 13px 19px;
+}
+.Pagination li a:hover{
+    background-color: #EB5A1E;
+    color: #fff;
+}
+
+.Pagination li.selected a{
+    background-color: #EB5A1E;
+    color: #fff;
+}
