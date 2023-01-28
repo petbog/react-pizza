@@ -3,11 +3,8 @@ import Pizzalogo from '../../img/image 1.svg'
 import classes from './Header.module.css'
 import close from "../../img/9104213_close_cross_remove_delete_icon.svg"
 import search from "../../img/icons8-search.svg"
-import { React } from 'react';
-import { SearchContext } from './../Pages/HomePage';
 
-const Header = () => {
-    const {searchPizza,setSearchPizza}=React.useContext(SearchContext)
+const Header = ({searchPizza, setSearchPizza}) => {
     return (
         <div className={classes.header}>
             <Link to='/' className={classes.header_link}>

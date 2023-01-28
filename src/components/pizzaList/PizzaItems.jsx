@@ -1,18 +1,16 @@
 import Pizza from './Pizza/Pizza';
 import classes from './PizzaItems.module.css';
-import { useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import axios from 'axios';
 import Skeleton from './../../skeleton/skeleton';
 import SearchButton from '../searchMenuHeader/SearchButton';
 import Pagination from '../../pagination/Pagination';
 import { React } from 'react';
-import { SearchContext } from './../Pages/HomePage';
 
 
-const PizzaItems = () => {
 
-    const { searchPizza } = React.useContext(SearchContext)
-
+const PizzaItems = ({searchPizza}) => {
+    
     const [items, SetItems] = useState([])
     const [isLoader, SetIsLoader] = useState(true)
     const [categoryId, setCategoryId] = useState(0)
