@@ -1,19 +1,23 @@
 import Pizza from './Pizza/Pizza';
 import classes from './PizzaItems.module.css';
-import {  useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Skeleton from './../../skeleton/skeleton';
 import SearchButton from '../searchMenuHeader/SearchButton';
 import Pagination from '../../pagination/Pagination';
-import { React } from 'react';
+import {useSelector,useDispatch} from 'react-redux';
+import {setCategoryId} from '../../Redux/slise/filterSlise'
 
 
 
-const PizzaItems = ({searchPizza}) => {
-    
+const PizzaItems = ({ searchPizza }) => {
+    const categoryId = useSelector(state => state.filter.categoryId)
+    const dispatch= useDispatch()
+
+
     const [items, SetItems] = useState([])
     const [isLoader, SetIsLoader] = useState(true)
-    const [categoryId, setCategoryId] = useState(0)
+
     const [currentPage, setCurrentPage] = useState(1)
     const [ratingId, setRatingId] = useState({ name: 'по пулярности', typePizza: 'rating' })
 
@@ -25,23 +29,22 @@ const PizzaItems = ({searchPizza}) => {
 
     useEffect(() => {
         SetIsLoader(true)
-        axios.get(`https://63bf2a38e262345656e4a5dd.mockapi.io/items?page=${currentPage}&limit=3${category}&sortBy=${sortBy}&order=${order}${search}`)
+        axios.get(`https://63bf2a38e262345656e4a5dd.mockapi.io/items?page=${currentPage}&limit=3&sortBy=${sortBy}&order=${order}${search}${category}`)
             .then(res => {
                 SetItems(res.data);
                 SetIsLoader(false)
             })
 
-    }, [category, sortBy, order, search, currentPage])
+    }, [category,sortBy, order, search, currentPage])
 
 
     const skeleton = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
     const pizzaList = items.map(pizza => <Pizza key={pizza.id} {...pizza} />)
 
 
-
     return (
         <div className="">
-            < SearchButton categoryId={categoryId} setCategoryId={(id) => setCategoryId(id)}
+            < SearchButton categoryId={categoryId} setCategoryId={(id) => dispatch(setCategoryId(id))}
                 ratingId={ratingId} setRatingId={(id) => setRatingId(id)}
             />
             < div className="" >

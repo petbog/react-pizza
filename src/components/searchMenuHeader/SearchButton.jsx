@@ -8,7 +8,7 @@ const SearchButton = ({categoryId,setCategoryId,ratingId,setRatingId}) => {
     return (
         <div className={classes.SearchButton}>
             <div className={classes.SearchButton_container}>
-                <ul className={classes.SearchButton} _list>
+                <ul className={classes.SearchButton}>
                     {names.map((value, i) => (
                         <li onClick={() => { setCategoryId(i) }}
                             key={i}

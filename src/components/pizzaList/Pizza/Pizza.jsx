@@ -23,7 +23,7 @@ const Pizza = ({ imageUrl, title, types, sizes, price }) => {
                     </div>
                     <div className={classes.pizza_size}>
                         {
-                            sizes.map((size, i) => <p onClick={() => setSizePizza(i)} key={size.id}
+                            sizes.map((size, i) => <p onClick={() => setSizePizza(i)} key={i}
                                 className={`${classes.pizza_size_items} ${sizePizza === i ? classes.active : ''}`}>{size} см</p>)
                         }
 
