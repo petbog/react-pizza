@@ -3,8 +3,30 @@ import Pizzalogo from '../../img/image 1.svg'
 import classes from './Header.module.css'
 import close from "../../img/9104213_close_cross_remove_delete_icon.svg"
 import search from "../../img/icons8-search.svg"
+import { useRef, useState } from 'react';
+import debounce from 'lodash.debounce';
+import { useCallback } from 'react';
 
-const Header = ({searchPizza, setSearchPizza}) => {
+
+const Header = ({ searchPizza, setSearchPizza }) => {
+    const[value, setValue] = useState('')
+    const inputRef = useRef()
+
+    const updateSearchValue =  useCallback(
+        debounce((str) => {
+            setSearchPizza(str);
+        }, 1000), [],
+    )
+
+    const onChangeInput=(event)=>{
+        setValue(event.target.value);
+        updateSearchValue(event.target.value)
+    }
+    const FocusInput = () => {
+        setSearchPizza('')
+        setValue('')
+        inputRef.current.focus()
+    }
     return (
         <div className={classes.header}>
             <Link to='/' className={classes.header_link}>
@@ -18,8 +40,8 @@ const Header = ({searchPizza, setSearchPizza}) => {
             </Link>
             <div className={classes.search_container}>
                 <img className={classes.search} src={search} alt="search" />
-                <input value={searchPizza} onChange={(e) => setSearchPizza(e.currentTarget.value)} className={classes.searchPizza} type="text" />
-                {searchPizza && <img onClick={()=> setSearchPizza('')} className={classes.close} src={close} alt="closed" />}
+                <input ref={inputRef} placeholder='Поиск пиццы...' value={value} onChange={onChangeInput} className={classes.searchPizza} type="text" />
+                {value && <img onClick={FocusInput} className={classes.close} src={close} alt="closed" />}
 
             </div>
             <div className={classes.header__button__container}>

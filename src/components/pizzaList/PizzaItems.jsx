@@ -11,6 +11,7 @@ import {setCategoryId} from '../../Redux/slise/filterSlise'
 
 
 const PizzaItems = ({ searchPizza }) => {
+    const sort = useSelector(state=>state.filter.sort.typePizza)
     const categoryId = useSelector(state => state.filter.categoryId)
     const dispatch= useDispatch()
 
@@ -19,11 +20,10 @@ const PizzaItems = ({ searchPizza }) => {
     const [isLoader, SetIsLoader] = useState(true)
 
     const [currentPage, setCurrentPage] = useState(1)
-    const [ratingId, setRatingId] = useState({ name: 'по пулярности', typePizza: 'rating' })
 
     const category = categoryId > 0 ? `category=${categoryId}` : '';
-    const sortBy = ratingId.typePizza.replace('-', '');
-    const order = ratingId.typePizza.includes('-') ? 'asc' : 'desc';
+    const sortBy = sort.replace('-', '');
+    const order = sort.includes('-') ? 'asc' : 'desc';
     const search = searchPizza ? `&search=${searchPizza}` : ''
 
 
@@ -44,9 +44,7 @@ const PizzaItems = ({ searchPizza }) => {
 
     return (
         <div className="">
-            < SearchButton categoryId={categoryId} setCategoryId={(id) => dispatch(setCategoryId(id))}
-                ratingId={ratingId} setRatingId={(id) => setRatingId(id)}
-            />
+            < SearchButton categoryId={categoryId} setCategoryId={(id) => dispatch(setCategoryId(id))} />
             < div className="" >
                 <div className={classes.item_title}>
                     <h3>Все пиццы</h3>

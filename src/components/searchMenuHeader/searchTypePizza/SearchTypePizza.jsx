@@ -1,7 +1,12 @@
 import classes from './SearchTypePizza.module.css';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {setRatingId} from '../../../Redux/slise/filterSlise'
 
-const SearchTypePizza = ({ ratingId, setRatingId }) => {
+const SearchTypePizza = () => {
+    const sort = useSelector(state => state.filter.sort)
+    const dispatch = useDispatch()
+
     const [searchMenu, SetsearchMenu] = useState(false);
     const TypeSearchPizza = [
         { name: 'по пулярности  ↑', typePizza: 'rating' },
@@ -14,7 +19,7 @@ const SearchTypePizza = ({ ratingId, setRatingId }) => {
 
 
     const ActiveListSearch = (i) => {
-        setRatingId(i);
+        dispatch(setRatingId(i));
         SetsearchMenu(false)
     }
 
@@ -23,7 +28,7 @@ const SearchTypePizza = ({ ratingId, setRatingId }) => {
             <div className={classes.pizze_search}>
                 <span className={classes.pizza_triangle}>&#9650;</span>
                 <span onClick={() => { SetsearchMenu(!searchMenu) }}>Сортировка по: </span>
-                <span onClick={() => { SetsearchMenu(!searchMenu) }} className={classes.search_position}>{ratingId.name}</span>
+                <span onClick={() => { SetsearchMenu(!searchMenu) }} className={classes.search_position}>{sort.name}</span>
             </div>
             {
                 searchMenu && (<div className="">
@@ -32,7 +37,7 @@ const SearchTypePizza = ({ ratingId, setRatingId }) => {
                             TypeSearchPizza.map((obj) => <li
                                 onClick={() => { ActiveListSearch(obj) }}
                                 key={obj.name}
-                                className={`${classes.list_serch_menu} ${ratingId.typePizza === obj.typePizza ? classes.active : ''}`}>{obj.name}</li>)
+                                className={`${classes.list_serch_menu} ${sort.typePizza === obj.typePizza ? classes.active : ''}`}>{obj.name}</li>)
                         }
 
                     </ul>

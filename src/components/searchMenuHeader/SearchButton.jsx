@@ -1,7 +1,7 @@
 import classes from './SearchButton.module.css'
 import SearchTypePizza from './searchTypePizza/SearchTypePizza'
 
-const SearchButton = ({categoryId,setCategoryId,ratingId,setRatingId}) => {
+const SearchButton = ({categoryId,setCategoryId}) => {
     const names = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
 
@@ -18,7 +18,7 @@ const SearchButton = ({categoryId,setCategoryId,ratingId,setRatingId}) => {
                     ))}
 
                 </ul>
-                <SearchTypePizza ratingId={ratingId} setRatingId={setRatingId}/>
+                <SearchTypePizza />
             </div>
         </div>
     )

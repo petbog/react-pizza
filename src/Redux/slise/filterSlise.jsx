@@ -17,7 +17,7 @@ export const filterSlise = createSlice({
             state.categoryId = action.payload
         },
         setRatingId(state,action){
-            state.ratingId=action.payload
+            state.sort=action.payload
         }
     }
 })
