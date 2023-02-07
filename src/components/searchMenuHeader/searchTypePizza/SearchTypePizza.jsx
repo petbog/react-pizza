@@ -1,7 +1,7 @@
 import classes from './SearchTypePizza.module.css';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {setRatingId} from '../../../Redux/slise/filterSlise'
+import { setRatingId } from '../../../Redux/slise/filterSlise'
 
 const SearchTypePizza = () => {
     const sort = useSelector(state => state.filter.sort)
@@ -23,8 +23,23 @@ const SearchTypePizza = () => {
         SetsearchMenu(false)
     }
 
+    const pizza_container_ref = useRef()
+
+    useEffect(() => {
+        const handleClickOutsade = event => {
+            if (!event.composedPath().includes(pizza_container_ref.current)) {
+                SetsearchMenu(false)
+            }
+        }
+        document.body.addEventListener('click', handleClickOutsade)
+
+        return()=>{
+            document.body.removeEventListener('click',handleClickOutsade)
+        }
+    }, [])
+
     return (
-        <div className={classes.pizza_container}>
+        <div ref={pizza_container_ref} className={classes.pizza_container}>
             <div className={classes.pizze_search}>
                 <span className={classes.pizza_triangle}>&#9650;</span>
                 <span onClick={() => { SetsearchMenu(!searchMenu) }}>Сортировка по: </span>

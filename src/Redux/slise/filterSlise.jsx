@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     categoryId: 0,
-    ratingId:0,
+    curentPage:1,
     sort: {
         name: 'по пулярности',
         typePizza: 'rating'
@@ -18,9 +18,12 @@ export const filterSlise = createSlice({
         },
         setRatingId(state,action){
             state.sort=action.payload
+        },
+        setCurentPage(state,action){
+            state.curentPage=action.payload
         }
     }
 })
 
-export const { setCategoryId,setRatingId } =filterSlise.actions;
+export const { setCategoryId,setRatingId,setCurentPage} =filterSlise.actions;
 export default filterSlise.reducer
