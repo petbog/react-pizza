@@ -6,19 +6,23 @@ import search from "../../img/icons8-search.svg"
 import { useRef, useState } from 'react';
 import debounce from 'lodash.debounce';
 import { useCallback } from 'react';
+import cart from '../../img/iconfinder_shopping-cart_2561279 1.svg'
+import { useSelector } from 'react-redux';
 
 
-const Header = ({ searchPizza, setSearchPizza }) => {
-    const[value, setValue] = useState('')
+const Header = ({ setSearchPizza }) => {
+    const {totalPrise,items } = useSelector(state => state.cart)
+
+    const [value, setValue] = useState('')
     const inputRef = useRef()
 
-    const updateSearchValue =  useCallback(
+    const updateSearchValue = useCallback(
         debounce((str) => {
             setSearchPizza(str);
-        }, 1000), [],
+        }, 1000), []
     )
 
-    const onChangeInput=(event)=>{
+    const onChangeInput = (event) => {
         setValue(event.target.value);
         updateSearchValue(event.target.value)
     }
@@ -40,13 +44,24 @@ const Header = ({ searchPizza, setSearchPizza }) => {
             </Link>
             <div className={classes.search_container}>
                 <img className={classes.search} src={search} alt="search" />
-                <input ref={inputRef} placeholder='Поиск пиццы...' value={value} onChange={onChangeInput} className={classes.searchPizza} type="text" />
+                <input ref={inputRef} placeholder='Поиск пиццы...'
+                    value={value} onChange={onChangeInput}
+                    className={classes.searchPizza}
+                    type="text" />
                 {value && <img onClick={FocusInput} className={classes.close} src={close} alt="closed" />}
 
             </div>
             <div className={classes.header__button__container}>
                 <button className={classes.header__button}>
-                    <Link to="/basket" className={classes.header__button_link}>Отправить</Link>
+                    <Link to="/cart" className={classes.header__button_link_container} >
+                        <div className={classes.header__button_link}>
+                            <div className={classes.button_money}>{totalPrise} ₽</div>
+                            <div className={classes.button_cart}>
+                                <p className={classes.button_cart_quantity}>{items.length}</p>
+                                <img className={classes.button_cart_img} src={cart} alt="cart_img" />
+                            </div>
+                        </div>
+                    </Link>
                 </button>
             </div>
         </div >

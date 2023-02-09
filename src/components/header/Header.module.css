@@ -43,14 +43,15 @@
     background-color: #FE5F1E;
     color: #fff;
     border: none;
-    padding: 15px 32px 15px 32px;
-    border-radius: 33%;
+    padding: 2px 28px ;
+    border-radius: 33px;
     font-size: 16px;
 }
 
 .header__button_link {
     text-decoration: none;
     color: #F6F6F6;
+    display: flex;
 }
 .header_link{
 text-decoration: none;
@@ -87,4 +88,20 @@ color: #181818;
     width: 25px;
     height: 25px;
     opacity: 0.5;
+}
+.header__button_link_container{
+ text-decoration: none;
+}
+.button_cart{
+    display: flex;
+}
+.button_money{
+    padding: 16px 16px 16px 0;
+    border-right: 2px solid #fff;
+}
+.button_cart_quantity{
+    padding: 0 0 0 16px;
+}
+.button_cart_img{
+    margin-left: 3px;
 }
