@@ -5,16 +5,24 @@ import basket from '../../img/iconfinder_trash-2_3324927 1.svg'
 import CartItem from './CartItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearItem } from '../../Redux/slise/CartSlice';
+import BasketPage from '../Pages/BasketPage';
+import { Link } from 'react-router-dom';
 
 
 const Cart = () => {
-const dispatch =useDispatch()
+    const dispatch = useDispatch()
 
-    const items =useSelector(state=>state.cart.items)
+    const items = useSelector(state => state.cart.items)
+    const totalPrise = useSelector(state => state.cart.totalPrise)
+    const totalCount = items.reduce((sum,item) => sum + item.count,0)
 
-    const deleteCart=()=>{
-        if(window.confirm('Удалить корзину?'))
-        dispatch(clearItem())
+    const deleteCart = () => {
+        if (window.confirm('Удалить корзину?'))
+            dispatch(clearItem())
+    }
+
+    if(!totalPrise){
+       return <BasketPage/>
     }
     return (
         <div className={classes.Cart}>
@@ -32,9 +40,18 @@ const dispatch =useDispatch()
                 </div>
             </div>
             {
-                items.map(item =>  <CartItem key={item.id} {...item}/>)
+                items.map(item => <CartItem key={item.id} {...item} />)
             }
-           
+            <div className={classes.cart_footer}>
+                <div className={classes.cart_footer_container}>
+                    <div className={classes.cart_footer_totalPizz}>Всего пицц: {totalCount} шт.</div>
+                    <div className={classes.cart_footer_totalCount}>Сумма заказа: {totalPrise} ₽</div>
+                </div>
+                <div className={classes.cart_footer_container}>
+                    <Link to='/' className={classes.cart_footer_buttonBack}>&lt; Вернуться назад</Link>
+                    <div className={classes.cart_footer_buttonCash}>Оплатить сейчас</div>
+                </div>
+            </div>
         </div >
     )
 }
