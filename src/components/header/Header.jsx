@@ -11,7 +11,10 @@ import { useSelector } from 'react-redux';
 
 
 const Header = ({ setSearchPizza }) => {
-    const {totalPrise,items } = useSelector(state => state.cart)
+    const { totalPrise, items } = useSelector(state => state.cart)
+
+    const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+
 
     const [value, setValue] = useState('')
     const inputRef = useRef()
@@ -57,7 +60,7 @@ const Header = ({ setSearchPizza }) => {
                         <div className={classes.header__button_link}>
                             <div className={classes.button_money}>{totalPrise} ₽</div>
                             <div className={classes.button_cart}>
-                                <p className={classes.button_cart_quantity}>{items.length}</p>
+                                <p className={classes.button_cart_quantity}>{totalCount}</p>
                                 <img className={classes.button_cart_img} src={cart} alt="cart_img" />
                             </div>
                         </div>

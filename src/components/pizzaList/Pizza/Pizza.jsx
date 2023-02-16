@@ -1,12 +1,17 @@
 import { useState } from 'react'
 import classes from './Pizza.module.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../../Redux/slise/CartSlice'
 
 const Pizza = ({ id, imageUrl, title, types, sizes, price }) => {
     const typeNames = ['тонкое', 'традиционное'];
     const [typePizza, setTypePizza] = useState(0);
     const [sizePizza, setSizePizza] = useState(0);
+
+    const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id))
+    //если нашелся такой обьект в корзине вытаскивает count
+    const addedCount = cartItem ? cartItem.count : 0
+
 
     const dispatch = useDispatch()
 
@@ -16,8 +21,8 @@ const Pizza = ({ id, imageUrl, title, types, sizes, price }) => {
             imageUrl,
             title,
             price,
-            types: typePizza,
-            sizes: sizePizza
+            types: typeNames[typePizza],
+            size: sizes[sizePizza]
         }
         dispatch(addItem(item))
     }
@@ -47,7 +52,10 @@ const Pizza = ({ id, imageUrl, title, types, sizes, price }) => {
                         <div className={classes.pizza_price}>от {price} ₽</div>
                         <div onClick={() => OnClickAdd()}
                             className={classes.pizza_number_price}>+ Добавить
-                            {/* <span className={classes.number}>{}</span> */}
+                            {
+                                addedCount > 0 && <span className={classes.number}>{addedCount}</span>
+                            }
+
                         </div>
                     </div>
 
