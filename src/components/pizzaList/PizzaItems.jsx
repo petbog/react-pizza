@@ -6,15 +6,20 @@ import Skeleton from './../../skeleton/skeleton';
 import SearchButton from '../searchMenuHeader/SearchButton';
 import Pagination from '../../pagination/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setCurentPage } from '../../Redux/slise/filterSlise'
+import { setCategoryId, setCurentPage, setFilters } from '../../Redux/slise/filterSlise';
+import qs from 'qs';
+import { useNavigate } from 'react-router-dom';
+import { TypeSearchPizza } from '../searchMenuHeader/searchTypePizza/SearchTypePizza';
 
 
 
 const PizzaItems = ({ searchPizza }) => {
+
     const sort = useSelector(state => state.filter.sort.typePizza)
     const curentPage = useSelector(state => state.filter.curentPage)
     const categoryId = useSelector(state => state.filter.categoryId)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
 
     const [items, SetItems] = useState([])
@@ -29,6 +34,17 @@ const PizzaItems = ({ searchPizza }) => {
         dispatch(setCurentPage(number))
     }
 
+    useEffect(() => {
+        if (window.location.search) {
+            const params = qs.parse(window.location.search.substring(1))
+            const sort = TypeSearchPizza.find(obj => obj.sortProperti === params.sortProperti)
+            dispatch(setFilters({
+                ...params,
+                sort
+
+            }))
+        }
+    }, [dispatch])
 
     useEffect(() => {
         SetIsLoader(true)
@@ -39,6 +55,16 @@ const PizzaItems = ({ searchPizza }) => {
             })
 
     }, [category, sortBy, order, search, curentPage])
+
+
+    useEffect(() => {
+        const queryString = qs.stringify({
+            category,
+            order,
+            curentPage,
+        })
+        navigate(`?${queryString}`)
+    }, [navigate,category, order, curentPage])
 
 
     const skeleton = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
@@ -57,7 +83,7 @@ const PizzaItems = ({ searchPizza }) => {
                         isLoader ? skeleton : pizzaList
                     }
                 </div>
-                <Pagination curentPage = {curentPage} onChangePage={onPageChange} />
+                <Pagination curentPage={curentPage} onChangePage={onPageChange} />
             </div>
         </div >
     )

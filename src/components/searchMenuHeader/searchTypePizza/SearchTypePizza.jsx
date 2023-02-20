@@ -3,19 +3,21 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setRatingId } from '../../../Redux/slise/filterSlise'
 
+export const TypeSearchPizza = [
+    { name: 'по пулярности  ↑', typePizza: 'rating' },
+    { name: 'по пулярности ↓', typePizza: '-rating' },
+    { name: 'по цене ↑', typePizza: 'price' },
+    { name: 'по цене ↓', typePizza: '-price' },
+    { name: 'по алфавиту ↑', typePizza: 'title' },
+    { name: 'по алфавиту ↓', typePizza: '-title' }
+];
+
 const SearchTypePizza = () => {
     const sort = useSelector(state => state.filter.sort)
     const dispatch = useDispatch()
 
     const [searchMenu, SetsearchMenu] = useState(false);
-    const TypeSearchPizza = [
-        { name: 'по пулярности  ↑', typePizza: 'rating' },
-        { name: 'по пулярности ↓', typePizza: '-rating' },
-        { name: 'по цене ↑', typePizza: 'price' },
-        { name: 'по цене ↓', typePizza: '-price' },
-        { name: 'по алфавиту ↑', typePizza: 'title' },
-        { name: 'по алфавиту ↓', typePizza: '-title' }
-    ];
+
 
 
     const ActiveListSearch = (i) => {
@@ -33,8 +35,8 @@ const SearchTypePizza = () => {
         }
         document.body.addEventListener('click', handleClickOutsade)
 
-        return()=>{
-            document.body.removeEventListener('click',handleClickOutsade)
+        return () => {
+            document.body.removeEventListener('click', handleClickOutsade)
         }
     }, [])
 
