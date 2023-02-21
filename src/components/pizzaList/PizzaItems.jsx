@@ -10,21 +10,20 @@ import { setCategoryId, setCurentPage, setFilters } from '../../Redux/slise/filt
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { TypeSearchPizza } from '../searchMenuHeader/searchTypePizza/SearchTypePizza';
+import { setItems } from '../../Redux/slise/PizzaSlice';
 
 
 
 const PizzaItems = ({ searchPizza }) => {
-
     const sort = useSelector(state => state.filter.sort.typePizza)
     const curentPage = useSelector(state => state.filter.curentPage)
     const categoryId = useSelector(state => state.filter.categoryId)
+    const items = useSelector(state => state.pizza.items)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
 
-    const [items, SetItems] = useState([])
     const [isLoader, SetIsLoader] = useState(true)
-
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const sortBy = sort.replace('-', '');
     const order = sort.includes('-') ? 'asc' : 'desc';
@@ -35,6 +34,7 @@ const PizzaItems = ({ searchPizza }) => {
     }
 
     useEffect(() => {
+        //window.location.search наблюдает на url
         if (window.location.search) {
             const params = qs.parse(window.location.search.substring(1))
             const sort = TypeSearchPizza.find(obj => obj.sortProperti === params.sortProperti)
@@ -47,14 +47,13 @@ const PizzaItems = ({ searchPizza }) => {
     }, [dispatch])
 
     useEffect(() => {
-        SetIsLoader(true)
         axios.get(`https://63bf2a38e262345656e4a5dd.mockapi.io/items?page=${curentPage}&limit=3&sortBy=${sortBy}&order=${order}${search}${category}`)
             .then(res => {
-                SetItems(res.data);
+                dispatch(setItems(res.data));
                 SetIsLoader(false)
             })
 
-    }, [category, sortBy, order, search, curentPage])
+    }, [dispatch,category, sortBy, order, search, curentPage])
 
 
     useEffect(() => {
