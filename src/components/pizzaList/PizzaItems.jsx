@@ -1,7 +1,6 @@
 import Pizza from './Pizza/Pizza';
 import classes from './PizzaItems.module.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
 import Skeleton from './../../skeleton/skeleton';
 import SearchButton from '../searchMenuHeader/SearchButton';
 import Pagination from '../../pagination/Pagination';
@@ -10,7 +9,7 @@ import { setCategoryId, setCurentPage, setFilters } from '../../Redux/slise/filt
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { TypeSearchPizza } from '../searchMenuHeader/searchTypePizza/SearchTypePizza';
-import { setItems } from '../../Redux/slise/PizzaSlice';
+import { AxiosPizza } from './../../Redux/slise/PizzaSlice';
 
 
 
@@ -18,12 +17,11 @@ const PizzaItems = ({ searchPizza }) => {
     const sort = useSelector(state => state.filter.sort.typePizza)
     const curentPage = useSelector(state => state.filter.curentPage)
     const categoryId = useSelector(state => state.filter.categoryId)
-    const items = useSelector(state => state.pizza.items)
+    const { items, status } = useSelector(state => state.pizza)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
 
-    const [isLoader, SetIsLoader] = useState(true)
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const sortBy = sort.replace('-', '');
     const order = sort.includes('-') ? 'asc' : 'desc';
@@ -46,14 +44,17 @@ const PizzaItems = ({ searchPizza }) => {
         }
     }, [dispatch])
 
-    useEffect(() => {
-        axios.get(`https://63bf2a38e262345656e4a5dd.mockapi.io/items?page=${curentPage}&limit=3&sortBy=${sortBy}&order=${order}${search}${category}`)
-            .then(res => {
-                dispatch(setItems(res.data));
-                SetIsLoader(false)
-            })
 
-    }, [dispatch,category, sortBy, order, search, curentPage])
+
+    useEffect(() => {
+        dispatch(AxiosPizza({
+            category,
+            sortBy,
+            order,
+            search,
+            curentPage
+        }))
+    }, [dispatch, category, sortBy, order, search, curentPage])
 
 
     useEffect(() => {
@@ -63,7 +64,7 @@ const PizzaItems = ({ searchPizza }) => {
             curentPage,
         })
         navigate(`?${queryString}`)
-    }, [navigate,category, order, curentPage])
+    }, [navigate, category, order, curentPage])
 
 
     const skeleton = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
@@ -79,7 +80,8 @@ const PizzaItems = ({ searchPizza }) => {
                 </div>
                 <div className={classes.pizza_container}>
                     {
-                        isLoader ? skeleton : pizzaList
+                        status === 'error' ? (<div>ошибка</div>)
+                            : (status === 'loading' ? skeleton : pizzaList)
                     }
                 </div>
                 <Pagination curentPage={curentPage} onChangePage={onPageChange} />
