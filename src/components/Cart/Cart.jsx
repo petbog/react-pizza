@@ -4,7 +4,7 @@ import cart from '../../img/iconfinder_shopping-cart_2561279 1 (1).svg'
 import basket from '../../img/iconfinder_trash-2_3324927 1.svg'
 import CartItem from './CartItem';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearItem } from '../../Redux/slise/CartSlice';
+import { clearItem, selectorCartData } from '../../Redux/slise/CartSlice';
 import BasketPage from '../Pages/BasketPage';
 import { Link } from 'react-router-dom';
 
@@ -12,8 +12,7 @@ import { Link } from 'react-router-dom';
 const Cart = () => {
     const dispatch = useDispatch()
 
-    const items = useSelector(state => state.cart.items)
-    const totalPrise = useSelector(state => state.cart.totalPrise)
+    const {items,totalPrise}=useSelector(selectorCartData)
     const totalCount = items.reduce((sum,item) => sum + item.count,0)
 
     const deleteCart = () => {

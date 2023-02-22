@@ -7,11 +7,16 @@ import { useRef, useState } from 'react';
 import debounce from 'lodash.debounce';
 import { useCallback } from 'react';
 import cart from '../../img/iconfinder_shopping-cart_2561279 1.svg'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectorCartData } from '../../Redux/slise/CartSlice';
+import { setSearchValue } from '../../Redux/slise/filterSlise';
 
 
-const Header = ({ setSearchPizza }) => {
-    const { totalPrise, items } = useSelector(state => state.cart)
+const Header = () => {
+
+    const dispatch = useDispatch()
+
+    const { totalPrise, items } = useSelector(selectorCartData)
 
     const totalCount = items.reduce((sum, item) => sum + item.count, 0)
 
@@ -21,7 +26,7 @@ const Header = ({ setSearchPizza }) => {
 
     const updateSearchValue = useCallback(
         debounce((str) => {
-            setSearchPizza(str);
+            dispatch(setSearchValue(str));
         }, 1000), []
     )
 
@@ -30,7 +35,7 @@ const Header = ({ setSearchPizza }) => {
         updateSearchValue(event.target.value)
     }
     const FocusInput = () => {
-        setSearchPizza('')
+        dispatch(setSearchValue(''))
         setValue('')
         inputRef.current.focus()
     }

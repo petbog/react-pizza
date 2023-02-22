@@ -1,7 +1,7 @@
 import classes from './SearchTypePizza.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setRatingId } from '../../../Redux/slise/filterSlise'
+import { selectFilterData, setRatingId } from '../../../Redux/slise/filterSlise'
 
 export const TypeSearchPizza = [
     { name: 'по пулярности  ↑', typePizza: 'rating' },
@@ -13,7 +13,7 @@ export const TypeSearchPizza = [
 ];
 
 const SearchTypePizza = () => {
-    const sort = useSelector(state => state.filter.sort)
+    const sort = useSelector(selectFilterData)
     const dispatch = useDispatch()
 
     const [searchMenu, SetsearchMenu] = useState(false);

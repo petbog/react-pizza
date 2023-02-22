@@ -5,19 +5,18 @@ import Skeleton from './../../skeleton/skeleton';
 import SearchButton from '../searchMenuHeader/SearchButton';
 import Pagination from '../../pagination/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setCurentPage, setFilters } from '../../Redux/slise/filterSlise';
+import { selectFilterData, setCategoryId, setCurentPage, setFilters } from '../../Redux/slise/filterSlise';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { TypeSearchPizza } from '../searchMenuHeader/searchTypePizza/SearchTypePizza';
-import { AxiosPizza } from './../../Redux/slise/PizzaSlice';
+import { AxiosPizza, selectPizza } from './../../Redux/slise/PizzaSlice';
 
 
 
-const PizzaItems = ({ searchPizza }) => {
+const PizzaItems = () => {
     const sort = useSelector(state => state.filter.sort.typePizza)
-    const curentPage = useSelector(state => state.filter.curentPage)
-    const categoryId = useSelector(state => state.filter.categoryId)
-    const { items, status } = useSelector(state => state.pizza)
+    const {curentPage,categoryId,searchValue}=useSelector(selectFilterData)
+    const { items, status } = useSelector(selectPizza)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -25,7 +24,7 @@ const PizzaItems = ({ searchPizza }) => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const sortBy = sort.replace('-', '');
     const order = sort.includes('-') ? 'asc' : 'desc';
-    const search = searchPizza ? `&search=${searchPizza}` : ''
+    const search = searchValue ? `&search=${searchValue}` : ''
 
     const onPageChange = (number) => {
         dispatch(setCurentPage(number))
