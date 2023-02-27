@@ -7,7 +7,7 @@ import Pagination from '../../pagination/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilterData, setCategoryId, setCurentPage, setFilters } from '../../Redux/slise/filterSlise';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TypeSearchPizza } from '../searchMenuHeader/searchTypePizza/SearchTypePizza';
 import { AxiosPizza, selectPizza } from './../../Redux/slise/PizzaSlice';
 
@@ -15,7 +15,7 @@ import { AxiosPizza, selectPizza } from './../../Redux/slise/PizzaSlice';
 
 const PizzaItems = () => {
     const sort = useSelector(state => state.filter.sort.typePizza)
-    const {curentPage,categoryId,searchValue}=useSelector(selectFilterData)
+    const { curentPage, categoryId, searchValue } = useSelector(selectFilterData)
     const { items, status } = useSelector(selectPizza)
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -67,7 +67,7 @@ const PizzaItems = () => {
 
 
     const skeleton = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
-    const pizzaList = items.map(pizza => <Pizza key={pizza.id} {...pizza} />)
+    const pizzaList = items.map(pizza => <Link to = {`/pizza/${pizza.id}`} key={pizza.id}> <Pizza  {...pizza} /></Link>)
 
 
     return (

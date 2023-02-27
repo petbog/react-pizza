@@ -29,7 +29,7 @@ const Pizza = ({ id, imageUrl, title, types, sizes, price }) => {
 
 
     return (
-        <div className="">
+        <div className={classes.pizza}>
             <div className={classes.pizza_container}>
                 <img src={imageUrl} alt="pizza" className={classes.img_pizza} />
                 <h4>{title}</h4>

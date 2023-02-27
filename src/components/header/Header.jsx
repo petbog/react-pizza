@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Pizzalogo from '../../img/image 1.svg'
 import classes from './Header.module.css'
 import close from "../../img/9104213_close_cross_remove_delete_icon.svg"
@@ -13,6 +13,8 @@ import { setSearchValue } from '../../Redux/slise/filterSlise';
 
 
 const Header = () => {
+
+    const location = useLocation()
 
     const dispatch = useDispatch()
 
@@ -60,17 +62,19 @@ const Header = () => {
 
             </div>
             <div className={classes.header__button__container}>
-                <button className={classes.header__button}>
-                    <Link to="/cart" className={classes.header__button_link_container} >
-                        <div className={classes.header__button_link}>
-                            <div className={classes.button_money}>{totalPrise} ₽</div>
-                            <div className={classes.button_cart}>
-                                <p className={classes.button_cart_quantity}>{totalCount}</p>
-                                <img className={classes.button_cart_img} src={cart} alt="cart_img" />
+                {
+                    location.pathname !== '/cart' ? <button className={classes.header__button}>
+                        <Link to="/cart" className={classes.header__button_link_container} >
+                            <div className={classes.header__button_link}>
+                                <div className={classes.button_money}>{totalPrise} ₽</div>
+                                <div className={classes.button_cart}>
+                                    <p className={classes.button_cart_quantity}>{totalCount}</p>
+                                    <img className={classes.button_cart_img} src={cart} alt="cart_img" />
+                                </div>
                             </div>
-                        </div>
-                    </Link>
-                </button>
+                        </Link>
+                    </button> : ''
+                }
             </div>
         </div >
     )
