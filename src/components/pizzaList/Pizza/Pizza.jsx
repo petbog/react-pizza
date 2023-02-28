@@ -2,6 +2,7 @@ import { useState } from 'react'
 import classes from './Pizza.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../../Redux/slise/CartSlice'
+import { Link } from 'react-router-dom';
 
 const Pizza = ({ id, imageUrl, title, types, sizes, price }) => {
     const typeNames = ['тонкое', 'традиционное'];
@@ -31,7 +32,9 @@ const Pizza = ({ id, imageUrl, title, types, sizes, price }) => {
     return (
         <div className={classes.pizza}>
             <div className={classes.pizza_container}>
-                <img src={imageUrl} alt="pizza" className={classes.img_pizza} />
+                <Link to={`/pizza/${id}`}>
+                    <img src={imageUrl} alt="pizza" className={classes.img_pizza} />
+                </Link>
                 <h4>{title}</h4>
                 <div className={classes.pizza_info}>
                     <div className={classes.pizza_testo}>

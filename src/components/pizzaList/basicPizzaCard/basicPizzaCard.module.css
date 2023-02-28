@@ -1,0 +1,15 @@
+.basic_img{
+    width: 400px;
+    height: 400px;
+    margin: 50px 0 0 0;
+}
+.basic_title{
+    font-weight: 600;
+    font-size: 25px;
+}
+.basic_price{
+    font-size: 25px;
+    font-weight: 400;
+    padding: 0px 0px 61px 0;
+
+}
