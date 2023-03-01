@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import ThereIsNoPage from './components/Pages/ThereIsNoPage';
 import Cart from './components/Cart/Cart';
 import FullPizza from './components/pizzaList/basicPizzaCard/basicPizzaCard';
+import React from 'react';
 
 
 function App() {

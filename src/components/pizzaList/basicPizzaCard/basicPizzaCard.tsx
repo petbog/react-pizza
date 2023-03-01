@@ -1,13 +1,17 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Header from "../../header/Header"
 import classes from './basicPizzaCard.module.css'
 
-const FullPizza = () => {
+const FullPizza: React.FC = () => {
     const { id } = useParams()
 
-    const [pizza, setPizza] = useState()
+    const [pizza, setPizza] = useState<{
+        imageUrl: string,
+        title: string,
+        price: number,
+    }>()
 
     console.log(pizza)
 
@@ -24,7 +28,7 @@ const FullPizza = () => {
     }, [id])
 
     if (!pizza) {
-      return  'Загрузка'
+        return <>'Загрузка...'</>
     }
     return (
         <div>
