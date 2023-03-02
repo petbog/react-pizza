@@ -9,11 +9,11 @@ import BasketPage from '../Pages/BasketPage';
 import { Link } from 'react-router-dom';
 
 
-const Cart = () => {
+const Cart:React.FC = () => {
     const dispatch = useDispatch()
 
     const {items,totalPrise}=useSelector(selectorCartData)
-    const totalCount = items.reduce((sum,item) => sum + item.count,0)
+    const totalCount = items.reduce((sum:number,item:string) => sum + item.count,0)
 
     const deleteCart = () => {
         if (window.confirm('Удалить корзину?'))

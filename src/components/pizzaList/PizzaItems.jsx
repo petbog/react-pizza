@@ -1,7 +1,7 @@
-import Pizza from './Pizza/Pizza';
+import Pizza from './Pizza/Pizza.tsx';
 import classes from './PizzaItems.module.css';
 import { useEffect } from 'react';
-import Skeleton from './../../skeleton/skeleton';
+import Skeleton from '../../skeleton/skeleton';
 import SearchButton from '../searchMenuHeader/SearchButton';
 import Pagination from '../../pagination/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,7 +9,7 @@ import { selectFilterData, setCategoryId, setCurentPage, setFilters } from '../.
 import qs from 'qs';
 import {  useNavigate } from 'react-router-dom';
 import { TypeSearchPizza } from '../searchMenuHeader/searchTypePizza/SearchTypePizza';
-import { AxiosPizza, selectPizza } from './../../Redux/slise/PizzaSlice';
+import { AxiosPizza, selectPizza } from '../../Redux/slise/PizzaSlice';
 
 
 

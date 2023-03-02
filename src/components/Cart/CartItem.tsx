@@ -3,7 +3,17 @@ import vector from '../../img/Vector.svg'
 import { useDispatch } from 'react-redux';
 import { addItem, minusItems, removeItem } from '../../Redux/slise/CartSlice';
 
-const CartItem = ({ id, imageUrl, title, price, types, size, count }) => {
+type CartItemProps={
+    id:string; 
+    imageUrl:string;
+    title:string;
+    price:number;
+    types:string;
+    size:number;
+    count:number;
+}
+
+const CartItem:React.FC<CartItemProps> = ({ id, imageUrl, title, price, types, size, count }) => {
 
     const dispatch = useDispatch()
     //нужно в плюсе передовать обьект а не просто id 

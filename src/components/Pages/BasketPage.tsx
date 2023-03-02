@@ -3,7 +3,7 @@ import BasketImg from "../../img/shopping-cart-colour 1.png"
 import classes from "./BasketPage.module.css"
 import { Link } from "react-router-dom";
 
-const BasketPage = () => {
+const BasketPage:React.FC = () => {
     return (
         <div className="">
             <Header />

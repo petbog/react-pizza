@@ -4,15 +4,15 @@ import classes from './Header.module.css'
 import close from "../../img/9104213_close_cross_remove_delete_icon.svg"
 import search from "../../img/icons8-search.svg"
 import { useRef, useState } from 'react';
-import debounce from 'lodash.debounce';
 import { useCallback } from 'react';
 import cart from '../../img/iconfinder_shopping-cart_2561279 1.svg'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectorCartData } from '../../Redux/slise/CartSlice';
 import { setSearchValue } from '../../Redux/slise/filterSlise';
+import { debounce } from 'ts-debounce';
 
 
-const Header = () => {
+const Header:React.FC = () => {
 
     const location = useLocation()
 
@@ -20,26 +20,32 @@ const Header = () => {
 
     const { totalPrise, items } = useSelector(selectorCartData)
 
-    const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
 
 
-    const [value, setValue] = useState('')
-    const inputRef = useRef()
+    const [value, setValue] = useState<string>('')
+    const inputRef = useRef<HTMLInputElement>(null)
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const updateSearchValue = useCallback(
         debounce((str) => {
             dispatch(setSearchValue(str));
         }, 1000), []
     )
 
-    const onChangeInput = (event) => {
+    const onChangeInput = (event:any) => {
         setValue(event.target.value);
         updateSearchValue(event.target.value)
     }
     const FocusInput = () => {
         dispatch(setSearchValue(''))
         setValue('')
-        inputRef.current.focus()
+        //способы пофискить это баг т.к focus приходит null или if или ?(optional chaning)
+        // inputRef.current.focus()
+        if(inputRef.current){
+            inputRef.current.focus()
+        }
+        // inputRef.current?.focus()
     }
     return (
         <div className={classes.header}>

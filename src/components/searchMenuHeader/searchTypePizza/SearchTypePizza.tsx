@@ -3,7 +3,13 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilterData, setRatingId } from '../../../Redux/slise/filterSlise'
 
-export const TypeSearchPizza = [
+
+type TypeSearchPizzaTypeProps = {
+    name: string;
+    typePizza: string;
+}
+
+export const TypeSearchPizza: TypeSearchPizzaTypeProps[] = [
     { name: 'по пулярности  ↑', typePizza: 'rating' },
     { name: 'по пулярности ↓', typePizza: '-rating' },
     { name: 'по цене ↑', typePizza: 'price' },
@@ -20,15 +26,15 @@ const SearchTypePizza = () => {
 
 
 
-    const ActiveListSearch = (i) => {
-        dispatch(setRatingId(i));
+    const ActiveListSearch = (obj:TypeSearchPizzaTypeProps) => {
+        dispatch(setRatingId(obj));
         SetsearchMenu(false)
     }
 
-    const pizza_container_ref = useRef()
+    const pizza_container_ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        const handleClickOutsade = event => {
+        const handleClickOutsade = (event: any) => {
             if (!event.composedPath().includes(pizza_container_ref.current)) {
                 SetsearchMenu(false)
             }

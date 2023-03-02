@@ -4,11 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../../Redux/slise/CartSlice'
 import { Link } from 'react-router-dom';
 
-const Pizza = ({ id, imageUrl, title, types, sizes, price }) => {
-    const typeNames = ['тонкое', 'традиционное'];
-    const [typePizza, setTypePizza] = useState(0);
-    const [sizePizza, setSizePizza] = useState(0);
+type PizzaProps = {
+    id:string;
+    imageUrl:string;
+    title:string;
+    types:number[];
+    sizes:number[];
+    price:number;
+}
 
+const Pizza:React.FC<PizzaProps> = ({ id, imageUrl, title, types, sizes, price }) => {
+    const typeNames = ['тонкое', 'традиционное'];
+    const [typePizza, setTypePizza] = useState<number>(0);
+    const [sizePizza, setSizePizza] = useState<number>(0);
+
+        // @ts-ignore
     const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id))
     //если нашелся такой обьект в корзине вытаскивает count
     const addedCount = cartItem ? cartItem.count : 0

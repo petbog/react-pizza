@@ -1,7 +1,12 @@
 import classes from './SearchButton.module.css'
 import SearchTypePizza from './searchTypePizza/SearchTypePizza'
 
-const SearchButton = ({categoryId,setCategoryId}) => {
+type SearchButtonType = {
+    categoryId:number;
+    setCategoryId:any;
+}
+
+const SearchButton:React.FC<SearchButtonType> = ({categoryId,setCategoryId}) => {
     const names = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
 
