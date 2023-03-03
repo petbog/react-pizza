@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectFilterData, setRatingId } from '../../../Redux/slise/filterSlise'
 
 
-type TypeSearchPizzaTypeProps = {
+export type TypeSearchPizzaTypeProps = {
     name: string;
     typePizza: string;
 }

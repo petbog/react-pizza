@@ -13,11 +13,12 @@ const Cart:React.FC = () => {
     const dispatch = useDispatch()
 
     const {items,totalPrise}=useSelector(selectorCartData)
-    const totalCount = items.reduce((sum:number,item:string) => sum + item.count,0)
+    const totalCount = items.reduce((sum:number,item:any) => sum + item.count,0)
 
     const deleteCart = () => {
-        if (window.confirm('Удалить корзину?'))
-            dispatch(clearItem())
+        if (window.confirm('Удалить корзину?'))      
+        // @ts-ignore
+        dispatch(clearItem())
     }
 
     if(!totalPrise){
@@ -39,7 +40,7 @@ const Cart:React.FC = () => {
                 </div>
             </div>
             {
-                items.map(item => <CartItem key={item.id} {...item} />)
+                items.map((item:any) => <CartItem key={item.id} {...item} />)
             }
             <div className={classes.cart_footer}>
                 <div className={classes.cart_footer_container}>
