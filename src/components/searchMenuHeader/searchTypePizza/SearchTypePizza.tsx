@@ -26,16 +26,18 @@ const SearchTypePizza = () => {
 
 
 
-    const ActiveListSearch = (obj:TypeSearchPizzaTypeProps) => {
+    const ActiveListSearch = (obj: TypeSearchPizzaTypeProps) => {
         dispatch(setRatingId(obj));
         SetsearchMenu(false)
     }
 
     const pizza_container_ref = useRef<HTMLDivElement>(null)
 
+
+    //еще один event смотреть внимательней на проверку
     useEffect(() => {
-        const handleClickOutsade = (event: any) => {
-            if (!event.composedPath().includes(pizza_container_ref.current)) {
+        const handleClickOutsade = (event:MouseEvent) => {
+            if (pizza_container_ref.current && !event.composedPath().includes(pizza_container_ref.current)) {
                 SetsearchMenu(false)
             }
         }

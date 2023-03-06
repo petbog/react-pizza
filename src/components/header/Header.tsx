@@ -3,7 +3,7 @@ import Pizzalogo from '../../img/image 1.svg'
 import classes from './Header.module.css'
 import close from "../../img/9104213_close_cross_remove_delete_icon.svg"
 import search from "../../img/icons8-search.svg"
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useCallback } from 'react';
 import cart from '../../img/iconfinder_shopping-cart_2561279 1.svg'
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,11 +33,13 @@ const Header:React.FC = () => {
         }, 1000), []
     )
 
-    const onChangeInput = (event:any) => {
+    const onChangeInput = (event:React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);
         updateSearchValue(event.target.value)
     }
-    const FocusInput = () => {
+
+    //типизация event на клик мыши
+    const FocusInput = (event:React.MouseEvent<HTMLImageElement>) => {
         dispatch(setSearchValue(''))
         setValue('')
         //способы пофискить это баг т.к focus приходит null или if или ?(optional chaning)

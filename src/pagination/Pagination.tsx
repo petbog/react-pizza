@@ -1,19 +1,19 @@
 import ReactPaginate from 'react-paginate'
 import classes from './Pagination.module.css'
 
-type PaginationProps ={
-    onChangePage: any;
-    curentPage:number;
+type PaginationProps = {
+    onChangePage:(page:number) => void ;
+    curentPage: number;
 }
 
-const Pagination:React.FC<PaginationProps> = ({onChangePage,curentPage}) => {
+const Pagination: React.FC<PaginationProps> = ({ onChangePage, curentPage }) => {
     return (
         <>
             <ReactPaginate
                 className={classes.Pagination}
                 breakLabel="..."
                 nextLabel=">"
-                onPageChange={(event:any) => { onChangePage(event.selected + 1 )}}
+                onPageChange={(event) => { onChangePage(event.selected + 1) }}
                 pageRangeDisplayed={3}
                 pageCount={4}
                 previousLabel="<"
