@@ -1,7 +1,7 @@
 import classes from './Cart.module.css'
 import vector from '../../img/Vector.svg'
 import { useDispatch } from 'react-redux';
-import { addItem, minusItems, removeItem } from '../../Redux/slise/CartSlice';
+import { addItem, CardItem, minusItems, removeItem } from '../../Redux/slise/CartSlice';
 
 type CartItemProps={
     id:string; 
@@ -13,12 +13,12 @@ type CartItemProps={
     count:number;
 }
 
-const CartItem:React.FC<CartItemProps> = ({ id, imageUrl, title, price, types, size, count }) => {
+const CartItemBlock:React.FC<CartItemProps> = ({ id, imageUrl, title, price, types, size, count }) => {
 
     const dispatch = useDispatch()
     //нужно в плюсе передовать обьект а не просто id 
     const onClickPlus = () => {
-        dispatch(addItem({ id }))
+        dispatch(addItem({ id }as CardItem))
     }
     const onClickMinus = () => {
         dispatch(minusItems(id))
@@ -59,4 +59,4 @@ const CartItem:React.FC<CartItemProps> = ({ id, imageUrl, title, price, types, s
 }
 
 
-export default CartItem
+export default CartItemBlock

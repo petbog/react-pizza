@@ -1,25 +1,25 @@
 import classes from './SearchTypePizza.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFilterData, setRatingId } from '../../../Redux/slise/filterSlise'
+import { selectSort, setRatingId, SortPropertyEnum } from '../../../Redux/slise/filterSlise'
 
 
-export type TypeSearchPizzaTypeProps = {
+type TypeSearchPizzaTypeProps = {
     name: string;
-    typePizza: string;
+    typePizza: SortPropertyEnum;
 }
 
 export const TypeSearchPizza: TypeSearchPizzaTypeProps[] = [
-    { name: 'по пулярности  ↑', typePizza: 'rating' },
-    { name: 'по пулярности ↓', typePizza: '-rating' },
-    { name: 'по цене ↑', typePizza: 'price' },
-    { name: 'по цене ↓', typePizza: '-price' },
-    { name: 'по алфавиту ↑', typePizza: 'title' },
-    { name: 'по алфавиту ↓', typePizza: '-title' }
+    { name: 'по пулярности  ↑', typePizza: SortPropertyEnum.RATING_DESC },
+    { name: 'по пулярности ↓', typePizza: SortPropertyEnum.RATING_ASC },
+    { name: 'по цене ↑', typePizza: SortPropertyEnum.PRICE_DESC },
+    { name: 'по цене ↓', typePizza: SortPropertyEnum.PRICE_ASC },
+    { name: 'по алфавиту ↑', typePizza: SortPropertyEnum.TITLE_DESC },
+    { name: 'по алфавиту ↓', typePizza: SortPropertyEnum.TITLE_ASC }
 ];
 
 const SearchTypePizza = () => {
-    const sort = useSelector(selectFilterData)
+    const sort = useSelector(selectSort)
     const dispatch = useDispatch()
 
     const [searchMenu, SetsearchMenu] = useState(false);
@@ -36,7 +36,7 @@ const SearchTypePizza = () => {
 
     //еще один event смотреть внимательней на проверку
     useEffect(() => {
-        const handleClickOutsade = (event:MouseEvent) => {
+        const handleClickOutsade = (event: MouseEvent) => {
             if (pizza_container_ref.current && !event.composedPath().includes(pizza_container_ref.current)) {
                 SetsearchMenu(false)
             }

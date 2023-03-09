@@ -2,7 +2,7 @@ import Header from '../header/Header'
 import classes from './Cart.module.css'
 import cart from '../../img/iconfinder_shopping-cart_2561279 1 (1).svg'
 import basket from '../../img/iconfinder_trash-2_3324927 1.svg'
-import CartItem from './CartItem';
+import CartItemBlock from './CartItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearItem, selectorCartData } from '../../Redux/slise/CartSlice';
 import BasketPage from '../Pages/BasketPage';
@@ -40,7 +40,7 @@ const Cart:React.FC = () => {
                 </div>
             </div>
             {
-                items.map((item:any) => <CartItem key={item.id} {...item} />)
+                items.map((item:any) => <CartItemBlock key={item.id} {...item} />)
             }
             <div className={classes.cart_footer}>
                 <div className={classes.cart_footer_container}>

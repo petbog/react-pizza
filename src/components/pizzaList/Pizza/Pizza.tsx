@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import classes from './Pizza.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../../../Redux/slise/CartSlice'
+import { addItem, CardItem } from '../../../Redux/slise/CartSlice'
 import { Link } from 'react-router-dom';
 
 type PizzaProps = {
@@ -27,13 +27,14 @@ const Pizza:React.FC<PizzaProps> = ({ id, imageUrl, title, types, sizes, price }
     const dispatch = useDispatch()
 
     const OnClickAdd = () => {
-        const item = {
+        const item:CardItem = {
             id,
             imageUrl,
             title,
             price,
             types: typeNames[typePizza],
-            size: sizes[sizePizza]
+            sizes: sizes[sizePizza],
+            count:0,
         }
         dispatch(addItem(item))
     }
