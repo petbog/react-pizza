@@ -10,9 +10,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectorCartData } from '../../Redux/slise/CartSlice';
 import { setSearchValue } from '../../Redux/slise/filterSlise';
 import { debounce } from 'ts-debounce';
+import { useEffect } from 'react';
 
 
-const Header:React.FC = () => {
+const Header: React.FC = () => {
+    const isMounted = useRef(false)
 
     const location = useLocation()
 
@@ -23,6 +25,13 @@ const Header:React.FC = () => {
     const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
 
 
+    useEffect(() => {
+        if (isMounted.current) {
+            const json = JSON.stringify(items)
+            localStorage.setItem('cart', json)
+        }
+        isMounted.current = true
+    }, [items])
     const [value, setValue] = useState<string>('')
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -33,18 +42,18 @@ const Header:React.FC = () => {
         }, 1000), []
     )
 
-    const onChangeInput = (event:React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);
         updateSearchValue(event.target.value)
     }
 
     //типизация event на клик мыши
-    const FocusInput = (event:React.MouseEvent<HTMLImageElement>) => {
+    const FocusInput = (event: React.MouseEvent<HTMLImageElement>) => {
         dispatch(setSearchValue(''))
         setValue('')
         //способы пофискить это баг т.к focus приходит null или if или ?(optional chaning)
         // inputRef.current.focus()
-        if(inputRef.current){
+        if (inputRef.current) {
             inputRef.current.focus()
         }
         // inputRef.current?.focus()
